@@ -125,3 +125,14 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     /* Adds depth to the text */
 }
+
+@media(max-width: 900px) {
+    .weather {
+        height: 100%;
+
+    }
+
+    .search-location {
+        width: 30rem;
+    }
+}
