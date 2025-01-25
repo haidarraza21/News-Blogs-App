@@ -4,14 +4,12 @@ import Weather from './Weather'
 import './News.css'
 import userImg from '../assets/images/user1.png'
 import noImg from '../assets/images/no-img.png'
-import blogImg1 from '../assets/images/blog1.jpg'
-import blogImg2 from '../assets/images/blog2.jpg'
-import blogImg3 from '../assets/images/blog3.jpg'
-import blogImg4 from '../assets/images/blog4.jpg'
+
 
 import axios from 'axios'
 import NewsModel from './NewsModel'
 import Bookmarks from './Bookmarks'
+import BlogsModel from './BlogsModel'
 
 
 const categories = [
@@ -26,7 +24,7 @@ const categories = [
 ]
 
 
-const News = ({ onShowBlogs, Blogs }) => {
+const News = ({ onShowBlogs, Blogs, onEditBlog, onDeleteBlog }) => {
     const [headline, setHeadline] = useState(null)
     const [nesw, setNews] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('general')
@@ -36,6 +34,8 @@ const News = ({ onShowBlogs, Blogs }) => {
     const [selectArticle, setSelectArticle] = useState(null)
     const [bookmarks, setBookmarks] = useState([])
     const [showBookmarksModel, setShowBookmarksModel] = useState(false)
+    const [selectedPost, setselcterPost] = useState(null)
+    const [showBlogModal, setShowBlogModal] = useState(false)
 
 
     useEffect(() => {
@@ -93,6 +93,17 @@ const News = ({ onShowBlogs, Blogs }) => {
         })
     }
 
+
+
+    const handleBlogClick = (blog) => {
+        setselcterPost(blog)
+        setShowBlogModal(true)
+    }
+
+    const closeBlogModal = () => {
+        setShowModel(false)
+        setselcterPost(null)
+    }
     return (
         <div className='nesw'>
             <header className='news-header'>
@@ -181,21 +192,27 @@ const News = ({ onShowBlogs, Blogs }) => {
                     <h1 className="my-blogs-heading">My Blogs</h1>
                     <div className="blog-posts">
                         {Blogs.map((blog, index) => (
-                            <div key={index} className="blog-post">
+                            <div key={index} className="blog-post" onClick={() => handleBlogClick(blog)}>
                                 <img src={blog.image || noImg} alt={blog.title} />
                                 <h3>{blog.title}</h3>
-                                {/* <p>{blog.content}</p> */}
                                 <div className="post-button">
-                                    <button className="edit-post">
+                                    <button className="edit-post" onClick={() => onEditBlog(blog)}>
                                         <i className='bx bxs-edit'></i>
                                     </button>
-                                    <button className="delete-post">
+                                    <button className="delete-post" onClick={(e) => {
+                                        e.stopPropagation()
+                                        onDeleteBlog(blog)
+                                    }}>
                                         <i className='bx bxs-x-circle'></i>
                                     </button>
                                 </div>
                             </div>
                         ))}
                     </div>
+                    {selectedPost && showBlogModal && (
+                        <BlogsModel show={showBlogModal} blog={selectedPost} onClose={closeBlogModal} />
+                    )}
+
                 </div>
                 <div className="weather-calender">
                     <Weather />

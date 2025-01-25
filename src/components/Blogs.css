@@ -123,12 +123,19 @@
     resize: none;
 }
 
+.text-input.invalid,
+.title-input.invalid {
+    border-bottom: 0.1rem solid #c4143a;
+}
+
 
 
 .text-input::placeholder,
 .text-input::placeholder {
     font-family: "Comfortaa", sans-serif;
     font-size: 1.3rem;
+    color: #b88efc;
+    opacity: 0.5;
 }
 
 .title-input::placeholder {
@@ -138,6 +145,11 @@
 .text-input:focus::placeholder,
 .text-input:focus::placeholder {
     color: transparent;
+}
+
+.text-input.invalid::placeholder,
+.title-input.invalid::placeholder {
+    color: #c4143a;
 }
 
 .submit-btn {
