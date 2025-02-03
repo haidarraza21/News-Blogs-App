@@ -40,10 +40,10 @@ const News = ({ onShowBlogs, Blogs, onEditBlog, onDeleteBlog }) => {
 
     useEffect(() => {
         const fetchNews = async () => {
-            let url = ` https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=d5ca2fffa45a8526dc313a32b0883219`
+            let url = ` https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=1364ca8bedb24a6b23852b18c192800b`
 
             if (searchQuery) {
-                url = `https://gnews.io/api/v4/search?q=${searchQuery}& lang=en&apikey=d5ca2fffa45a8526dc313a32b0883219`
+                url = `https://gnews.io/api/v4/search?q=${searchQuery}& lang=en&apikey=1364ca8bedb24a6b23852b18c192800b`
             }
 
             const response = await axios.get(url)
